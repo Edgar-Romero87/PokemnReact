@@ -1,19 +1,31 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemonList } from "../actions/pokemonActions.js";
+import * as actions from "../actions/pokemonActions.js";
+
+
 
 export default function Pokemon() {
+
   const dispatch = useDispatch();
-  const pokemonList = useSelector((state) => state.list);
-  console.log(pokemonList);
+
+  const listOfPokemon = useSelector((state) => state.list);
+  console.log('HAFSJGSVCJSVJHCV', listOfPokemon);
 
   useEffect(() => {
-    dispatch(getPokemonList());
+    dispatch(actions.getPokemonList())
   }, []);
 
   return (
+    
     <>
-      <h2>HELLO{pokemonList}</h2>
+      <h2>All Pokemon:</h2>
+        <ul>
+            {listOfPokemon.map( (item) => 
+              <li key={Math.random()} > 
+                {item.name}
+              </li>              
+            )}      
+        </ul>
     </>
   );
 }
